@@ -18,7 +18,7 @@ case object Empty extends RBTree {
   protected[bench] def ins(key: String, value: String) =
     Node(Red, Empty, Entry(key, value), Empty)
 
-  val height = 0
+  val height = 1
 }
 case class Node(color: Color, left: RBTree, entry: Entry, right: RBTree) extends RBTree {
   def get(key: String) = key compare entry.key match {
@@ -41,7 +41,7 @@ case class Node(color: Color, left: RBTree, entry: Entry, right: RBTree) extends
     case (B, a, x, N(R, b, y, N(R, c, z, d))) => N(R, N(B, a, x, b), y, N(B, c, z, d))
     case (c, l, e, r) => N(c, l, e, r)
   }
-
+  
   lazy val height = color.height + (left.height max right.height)
 }
 

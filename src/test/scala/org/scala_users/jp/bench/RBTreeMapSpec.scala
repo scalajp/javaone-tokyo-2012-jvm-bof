@@ -14,15 +14,15 @@ class RBTreeMapSpec extends Specification { def is =
                                                                               endp^
   "The put method should"                                                     ^
     `throw an Exception when the putting key is null`                         ^
-    `relate the key to the new value`                                                 ^
+    `relate the key to the new value`                                         ^
                                                                               endp^
   "The height method should"                                                  ^
-    `return 0 when the RBTreeMap is empty`                                    ^
-    `return 1 when the RBTreeMap has one entry`                               ^
-    `return 1 when the RBTreeMap has two entries`                             ^
-    `return 2 when the RBTreeMap has three entries`                           ^
-    `return 2 when the RBTreeMap has four entries`                            ^
-    `return 2 when the RBTreeMap has five entries`                            ^
+    `return 1 when the RBTreeMap is empty`                                    ^
+    `return 2 when the RBTreeMap has one entry`                               ^
+    `return 2 when the RBTreeMap has two entries`                             ^
+    `return 3 when the RBTreeMap has three entries`                           ^
+    `return 3 when the RBTreeMap has four entries`                            ^
+    `return 3 when the RBTreeMap has five entries`                            ^
                                                                               end
 
   val empty = RBTreeMap()
@@ -47,11 +47,11 @@ class RBTreeMapSpec extends Specification { def is =
     target.get("b") must be equalTo "xxx"
   }
 
-  def `return 0 when the RBTreeMap is empty` = empty.height must be equalTo 0
-  def `return 1 when the RBTreeMap has one entry` = one.height must be equalTo 1
-  def `return 1 when the RBTreeMap has two entries` = two.height must be equalTo 1
-  def `return 2 when the RBTreeMap has three entries` = three.height must be equalTo 2
-  def `return 2 when the RBTreeMap has four entries` = four.height must be equalTo 2
-  def `return 2 when the RBTreeMap has five entries` = five.height must be equalTo 2
+  def `return 1 when the RBTreeMap is empty` = empty.height must be equalTo 1
+  def `return 2 when the RBTreeMap has one entry` = one.height must be equalTo 2
+  def `return 2 when the RBTreeMap has two entries` = two.height must be equalTo 2
+  def `return 3 when the RBTreeMap has three entries` = three.height must be equalTo 3
+  def `return 3 when the RBTreeMap has four entries` = four.height must be equalTo 3
+  def `return 3 when the RBTreeMap has five entries` = five.height must be equalTo 3
 
 }
