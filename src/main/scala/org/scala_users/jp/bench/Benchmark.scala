@@ -10,7 +10,7 @@ object Benchmark extends App {
   val map = RBTreeMap.newInstance
 
   for {
-    line <- Resource.fromClasspath("rbtree_map_input.csv").lines()
+    line <- Resource.fromFile(args(0)).lines()
     Array(key, value, height, _*) = line.split(',')
   } {
     map.put(key, value)
@@ -18,7 +18,7 @@ object Benchmark extends App {
   }
 
   for {
-    line <- Resource.fromClasspath("rbtree_map_input.csv").lines()
+    line <- Resource.fromFile(args(0)).lines()
     Array(key, value, height, _*) = line.split(',')
   } {
     val actual = map.get(key)
