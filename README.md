@@ -14,7 +14,11 @@ build 方法
 1. [Scala 開発環境構築手順](https://github.com/scalajp/scalajp.github.com/wiki/scala-develop-environment "Scala 開発環境構築手順") 
    を参照し、sbt インストールを行います。
 1. インストールした sbt の実行シェル(Mac, Linux なら sbt、Windowsなら sbt.bat) を開き、JVMオプションを以下に設定します。
-   `java -Xmx1536M -Xss1M -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256m`
+
+        java -Xmx1536M -Xss1M -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256m
+
+    - 32bit OS の場合は `-Xmx1024M` にして下さい。
+
 1. Terminal、もしくはコマンドプロンプトにて、プロジェクトルートに移動し、`sbt assembly` を実行します。
 
 実行方法
@@ -22,7 +26,10 @@ build 方法
 
 ### Benchmark
 
-1. `java -Xmx1536M -Xss1M -XX:MaxPermSize=256m -cp target/javaone-tokyo-2012-jvm-bof-assembly-0.1.jar org.scala_users.jp.bench.Benchmark`
+1. 以下のコマンドを実行します。
+
+        java -Xmx1536M -Xss1M -XX:MaxPermSize=256m -cp target/javaone-tokyo-2012-jvm-bof-assembly-0.1.jar org.scala_users.jp.bench.Benchmark ${テスト対象CSVパス}
+
     - Windows の場合は path 区切り文字をバックスラッシュにして下さい。 `target\javaone-tokyo-2012-jvm-bof-assembly-0.1.jar`
     - 32bit OS の場合は `-Xmx1024M` にして下さい。
 
