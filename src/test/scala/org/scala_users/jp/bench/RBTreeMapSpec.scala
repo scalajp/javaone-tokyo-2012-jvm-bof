@@ -47,11 +47,11 @@ class RBTreeMapSpec extends Specification { def is =
     target.get("b") must be equalTo "xxx"
   }
 
-  def `return 1 when the RBTreeMap is empty` = empty.height must be equalTo 1
-  def `return 2 when the RBTreeMap has one entry` = one.height must be equalTo 2
-  def `return 2 when the RBTreeMap has two entries` = two.height must be equalTo 2
-  def `return 3 when the RBTreeMap has three entries` = three.height must be equalTo 3
-  def `return 3 when the RBTreeMap has four entries` = four.height must be equalTo 3
-  def `return 3 when the RBTreeMap has five entries` = five.height must be equalTo 3
+  def `return 0 when the RBTreeMap is empty` = empty.height must be equalTo 0
+  def `return 1 when the RBTreeMap has one entry` = one.height must be equalTo 1
+  def `return 1 when the RBTreeMap has two entries` = two.height must be equalTo 1
+  def `return 2 when the RBTreeMap has three entries` = three.height must be equalTo 2
+  def `return 2 when the RBTreeMap has four entries` = four.height must be equalTo 2
+  def `return 2 when the RBTreeMap has five entries` = five.height must be equalTo 2
 
 }
