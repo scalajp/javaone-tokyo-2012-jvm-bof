@@ -31,14 +31,15 @@ class HierarchyMapSpec extends Specification { def is =
         "maxReport" := "c"
       ),
       "files" := (
-        "input.encoding" := "d",
-        "output.encoding" := "e"
+        "d",
+        "input.encoding" := "e",
+        "output.encoding" := "f"
       )
     )
 
   def `return None when the HierarchyMap is empty` = HierarchyMap.empty.get("aa") must beNone
-  def `return a value related with the key` = target.get("compiler.files.input.encoding") must beSome.which { "d" == }
-  def `return None when the HierarchyMap does not contain the key` = target.get("compiler.files") must beNone
+  def `return a value related with the key` = target.get("compiler.files.input.encoding") must beSome.which { "e" == }
+  def `return None when the HierarchyMap does not contain the key` = target.get("compiler.error") must beNone
 
   def `relate the key to the new value` = {
     val newTarget = target + ("compiler.error.maxReport" -> "xxx")
@@ -50,8 +51,9 @@ class HierarchyMapSpec extends Specification { def is =
     p.setProperty("compiler.error.message.varNotFound", "a")
     p.setProperty("compiler.error.message.incompatibleType", "b")
     p.setProperty("compiler.error.maxReport", "c")
-    p.setProperty("compiler.files.input.encoding", "d")
-    p.setProperty("compiler.files.output.encoding", "e")
+    p.setProperty("compiler.files", "d")
+    p.setProperty("compiler.files.input.encoding", "e")
+    p.setProperty("compiler.files.output.encoding", "f")
     p
   }
 }

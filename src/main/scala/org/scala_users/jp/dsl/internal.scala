@@ -1,15 +1,14 @@
 package org.scala_users.jp.dsl
 
-
 object internal {
   
   implicit def stringToHierarchyMap(prefix: String) = new {
 
-    def := (value: String): HierarchyMap[String] =
-      HierarchyMap.empty + (prefix -> value)
-
-    def := (value: HierarchyMap[String]*): HierarchyMap[String] =
-      prefix :+: value.reduceLeft(_ ++ _)
+    def := (values: Any*): HierarchyMap[String] =
+      prefix :+: values.map {
+        case v: String => new HierarchyMap(Some(v), Map.empty)
+        case v: HierarchyMap[String] => v
+      }.reduceLeft(_ ++ _)
 
   }
   

@@ -1,8 +1,8 @@
 package org.scala_users.jp.dsl
 
-import collection.immutable.MapLike
-import collection.generic.{CanBuildFrom}
-import collection.mutable.{MapBuilder, Builder}
+import scala.collection.immutable.MapLike
+import scala.collection.generic.{CanBuildFrom}
+import scala.collection.mutable.{MapBuilder, Builder}
 import java.util.Properties
 
 @SerialVersionUID(1L)
