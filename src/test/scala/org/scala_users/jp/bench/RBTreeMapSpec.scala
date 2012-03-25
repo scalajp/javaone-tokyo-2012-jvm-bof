@@ -17,12 +17,12 @@ class RBTreeMapSpec extends Specification { def is =
     `relate the key to the new value`                                         ^
                                                                               endp^
   "The height method should"                                                  ^
-    `return 1 when the RBTreeMap is empty`                                    ^
-    `return 2 when the RBTreeMap has one entry`                               ^
-    `return 2 when the RBTreeMap has two entries`                             ^
-    `return 3 when the RBTreeMap has three entries`                           ^
-    `return 3 when the RBTreeMap has four entries`                            ^
-    `return 3 when the RBTreeMap has five entries`                            ^
+    `return 0 when the RBTreeMap is empty`                                    ^
+    `return 1 when the RBTreeMap has one entry`                               ^
+    `return 1 when the RBTreeMap has two entries`                             ^
+    `return 2 when the RBTreeMap has three entries`                           ^
+    `return 2 when the RBTreeMap has four entries`                            ^
+    `return 2 when the RBTreeMap has five entries`                            ^
                                                                               end
 
   val empty = RBTreeMap()
