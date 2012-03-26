@@ -1,4 +1,4 @@
-package org.scala_users.jp.bench
+package org.scala_users.jp.bench.immutable
 
 import org.specs2._
 
