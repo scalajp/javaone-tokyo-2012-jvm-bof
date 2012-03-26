@@ -11,6 +11,7 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= Seq(
+  "thrift" % "libthrift" % "0.5.0" from "http://maven.twttr.com/org/apache/thrift/libthrift/0.5.0/libthrift-0.5.0.jar",
   "com.twitter" %% "util" % "1.12.13",
   "com.github.scala-incubator.io" %% "scala-io-core" % "0.3.0",
   "com.github.scala-incubator.io" %% "scala-io-file" % "0.3.0",
