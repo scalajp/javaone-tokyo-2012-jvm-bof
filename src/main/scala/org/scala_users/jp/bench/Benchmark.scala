@@ -7,14 +7,14 @@ object Benchmark extends App {
 
   val start = Time.now
 
-  val map = immutable.RBTreeMap.newInstance
+  val map = mutable.RBTreeMap.newInstance
 
   def using(f: Stream[String] => Unit) {
     val in = new FileInputStream(args(0))
     try {
       val reader = new InputStreamReader(in, "UTF-8")
       val buff = new BufferedReader(reader)
-      val stream = Stream.continually(buff.readLine()).takeWhile(null ==)
+      val stream = Stream.continually(buff.readLine()).takeWhile(null !=)
       f(stream)
     } finally {
      in.close() 
@@ -42,5 +42,5 @@ object Benchmark extends App {
   }
 
   println(start.untilNow.inMilliseconds)
-
+  
 }
