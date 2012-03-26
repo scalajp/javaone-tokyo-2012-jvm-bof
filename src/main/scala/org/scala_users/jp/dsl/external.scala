@@ -7,9 +7,9 @@ object external extends RegexParsers {
   def term: Parser[String] = """([\w.]|\\\{|\\\})+""".r ^^ { case v => v.filter('\\'!=) }
 
   def unit: Parser[HierarchyMap[String]] = term~"="~term ^^ {
-    case (k~"="~v) => HierarchyMap.empty + (k -> v)
+    case (k~_~v) => HierarchyMap(k -> v)
   }
-  
+
   def value: Parser[HierarchyMap[String]] = unit | term ^^ { case v => new HierarchyMap(Some(v), Map.empty) }
 
   def prefixWith: Parser[HierarchyMap[String]] = term~"{"~rep(prefixWith | value)~"}" ^^ {

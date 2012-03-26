@@ -13,7 +13,7 @@ class HierarchyMap[+B] private[dsl] (value: Option[B], suffixes: Map[String, Hie
 
   override def empty = HierarchyMap.empty
 
-  import HierarchyMap.separate
+  private[dsl] def separate(key: String): List[String] = key.split('.').toList
 
   def + [B1 >: B](kv: (String, B1)): HierarchyMap[B1] = this + (separate(kv._1), kv._2)
 
@@ -60,15 +60,15 @@ class HierarchyMap[+B] private[dsl] (value: Option[B], suffixes: Map[String, Hie
     case (p, (k, v)) => p.setProperty(k, v); p
   }
 
-  def :+: (prefix: String): HierarchyMap[B] = separate(prefix) ::+:: this
+  def :+: (prefix: String): HierarchyMap[B] = separate(prefix) :++: this
 
-  private[dsl] def ::+:: (prefix: String): HierarchyMap[B] = {
+  private[dsl] def :++: (prefix: String): HierarchyMap[B] = {
     assert(prefix.forall { '.' != })
     new HierarchyMap(None, Map(prefix -> this))
   }
 
-  private[dsl] def ::+:: (prefixes: List[String]): HierarchyMap[B] = prefixes.foldRight(this) {
-    case (prefix, map) => prefix ::+:: map
+  private[dsl] def :++: (prefixes: List[String]): HierarchyMap[B] = prefixes.foldRight(this) {
+    case (prefix, map) => prefix :++: map
   }
   
   override def toString = "HierarchyMap(%s, %s)".format(value, suffixes)
@@ -92,7 +92,5 @@ object HierarchyMap {
     def apply(from: HierarchyMap[_]): Builder[(String, B), HierarchyMap[B]] = apply()
     def apply(): Builder[(String, B), HierarchyMap[B]] = newBuilder[B]
   }
-
-  private[dsl] def separate(key: String): List[String] = key.split('.').toList
 
 }

@@ -19,23 +19,14 @@ class HierarchyMapSpec extends Specification { def is =
     `return a java.util.Properties`                                           ^
                                                                               end
 
-  import internal._
-
-  val target =
-    "compiler" := (
-      "error" := (
-        "message" := (
-          "varNotFound" := "a",
-          "incompatibleType" := "b"
-        ),
-        "maxReport" := "c"
-      ),
-      "files" := (
-        "d",
-        "input.encoding" := "e",
-        "output.encoding" := "f"
-      )
-    )
+  val target = HierarchyMap(
+    "compiler.error.message.varNotFound" -> "a{1}",
+    "compiler.error.message.incompatibleType" -> "b",
+    "compiler.error.maxReport" -> "c",
+    "compiler.files" -> "d",
+    "compiler.files.input.encoding" -> "e",
+    "compiler.files.output.encoding" -> "f"
+  )
 
   def `return None when the HierarchyMap is empty` = HierarchyMap.empty.get("aa") must beNone
   def `return a value related with the key` = target.get("compiler.files.input.encoding") must beSome.which { "e" == }
@@ -48,7 +39,7 @@ class HierarchyMapSpec extends Specification { def is =
 
   def `return a java.util.Properties` = target.toProperties must beEqualTo {
     val p = new Properties
-    p.setProperty("compiler.error.message.varNotFound", "a")
+    p.setProperty("compiler.error.message.varNotFound", "a{1}")
     p.setProperty("compiler.error.message.incompatibleType", "b")
     p.setProperty("compiler.error.maxReport", "c")
     p.setProperty("compiler.files", "d")

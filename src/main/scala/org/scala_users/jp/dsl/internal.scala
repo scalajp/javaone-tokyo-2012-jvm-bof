@@ -7,7 +7,7 @@ object internal {
     def := (values: Any*): HierarchyMap[String] =
       prefix :+: values.map {
         case v: String => new HierarchyMap(Some(v), Map.empty)
-        case v: HierarchyMap[String] => v
+        case v: HierarchyMap[_] => v.asInstanceOf[HierarchyMap[String]]
       }.reduceLeft(_ ++ _)
 
   }
