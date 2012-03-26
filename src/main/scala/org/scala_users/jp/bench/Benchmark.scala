@@ -7,7 +7,7 @@ object Benchmark extends App {
 
   val start = Time.now
 
-  val map = RBTreeMap.newInstance
+  val map = immutable.RBTreeMap.newInstance
 
   for {
     line <- Resource.fromFile(args(0)).lines()

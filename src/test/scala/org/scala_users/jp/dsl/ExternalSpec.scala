@@ -12,20 +12,21 @@ class ExternalSpec extends Specification { def is =
                                                                                 end
 
   val target = """
-  compiler {
-    error {
-      message {
-        varNotFound = a\{1\}
-        incompatibleType = b
+    compiler {
+      error {
+        message {
+          varNotFound = a\{1\}
+          incompatibleType = b
+        }
+        maxReport = c
       }
-      maxReport = c
+      files {
+        d
+        input.encoding = e
+        output.encoding = f
+      }
     }
-    files {
-      d
-      input.encoding = e
-      output.encoding = f
-    }
-  }"""
+    """
 
   def `External DSL can parse` = parseAll(all, target).get.toProperties must beEqualTo {
     val p = new Properties

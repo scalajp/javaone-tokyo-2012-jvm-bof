@@ -1,4 +1,4 @@
-package org.scala_users.jp.bench
+package org.scala_users.jp.bench.immutable
 
 sealed abstract class Color(val height: Int)
 case object Red extends Color(0)
@@ -33,7 +33,7 @@ case class Node(color: Color, left: RBTree, entry: Entry, right: RBTree) extends
     case _          => Node(color, left, Entry(key, value), right)
   }
 
-  import org.scala_users.jp.bench.{Node => N, Red => R, Black => B}
+  import org.scala_users.jp.bench.immutable.{Node => N, Red => R, Black => B}
   private val balance: (Color, RBTree, Entry, RBTree) => Node = {
     case (B, N(R, N(R, a, x, b), y, c), z, d) => N(R, N(B, a, x, b), y, N(B, c, z, d))
     case (B, N(R, a, x, N(R, b, y, c)), z, d) => N(R, N(B, a, x, b), y, N(B, c, z, d))
