@@ -5,7 +5,7 @@ import java.io.{InputStreamReader, FileInputStream, BufferedReader}
 
 object Benchmark {
 
-  def using(fileName: String)(f: Stream[String] => Unit) {
+  def using(fileName: String)(f: Stream[String] => Any) {
     val in = new FileInputStream(fileName)
     try {
       val reader = new InputStreamReader(in, "UTF-8")
