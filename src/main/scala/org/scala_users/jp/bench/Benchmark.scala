@@ -3,14 +3,10 @@ package org.scala_users.jp.bench
 import com.twitter.util.Time
 import java.io.{InputStreamReader, FileInputStream, BufferedReader}
 
-object Benchmark extends App {
+object Benchmark {
 
-  val start = Time.now
-
-  val map = mutable.RBTreeMap.newInstance
-
-  def using(f: Stream[String] => Unit) {
-    val in = new FileInputStream(args(0))
+  def using(fileName: String)(f: Stream[String] => Unit) {
+    val in = new FileInputStream(fileName)
     try {
       val reader = new InputStreamReader(in, "UTF-8")
       val buff = new BufferedReader(reader)
@@ -21,26 +17,43 @@ object Benchmark extends App {
     }
   }
 
-  using { stream =>
-    for {
-      line <- stream
-      Array(key, value, height, _*) = line.split(',')
-    } {
-      map.put(key, value)
-      //    assert(height.toInt == map.height)
-    }
-  }
+  def execute(fileName: String) {
+    val start = Time.now
 
-  using { stream =>
-    for {
-      line <- stream
-      Array(key, value, height, _*) = line.split(',')
-    } {
-      val actual = map.get(key)
-      assert(value == actual)
-    }
-  }
+    val map = mutable.RBTreeMap.newInstance
 
-  println(start.untilNow.inMilliseconds)
+    using(fileName) { stream =>
+      for {
+        line <- stream
+        Array(key, value, height, _*) = line.split(',')
+      } {
+        map.put(key, value)
+        //    assert(height.toInt == map.height)
+      }
+    }
+
+    using(fileName) { stream =>
+      for {
+        line <- stream
+        Array(key, value, height, _*) = line.split(',')
+      } {
+        val actual = map.get(key)
+        assert(value == actual)
+      }
+    }
+
+    start.untilNow.inMilliseconds
+  }
+  
+  
+  def main(args: Array[String]) {
+    val file = args(0)
+    1 to 5 foreach { _ =>
+      execute(file)
+    }
+    val start = Time.now
+    execute(file)
+    println(start.untilNow.inMilliseconds)
+  }
   
 }
