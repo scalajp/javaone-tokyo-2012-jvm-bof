@@ -28,7 +28,7 @@ build 方法
 
 1. 以下のコマンドを実行します。
 
-        java -Xmx1536M -Xss1M -XX:MaxPermSize=256m -cp target/javaone-tokyo-2012-jvm-bof-assembly-0.1.jar org.scala_users.jp.bench.Benchmark ${テスト対象CSVパス}
+        java -Xmx1536M -Xss1M -XX:MaxPermSize=256m -server -cp target/javaone-tokyo-2012-jvm-bof-assembly-0.1.jar org.scala_users.jp.bench.Benchmark ${テスト対象CSVパス}
 
     - Windows の場合は path 区切り文字をバックスラッシュにして下さい。 `target\javaone-tokyo-2012-jvm-bof-assembly-0.1.jar`
     - 32bit OS の場合は `-Xmx1024M` にして下さい。
