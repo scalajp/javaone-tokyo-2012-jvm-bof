@@ -1,39 +1,39 @@
-JavaOne Tokyo 2012 JVMŒ¾ŒêBoF ƒR[ƒfƒBƒ“ƒO‘å‰ï ScalaJP
+JavaOne Tokyo 2012 JVMè¨€èªBoF ã‚³ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°å¤§ä¼š ScalaJP
 ======================================================
 
-ŠÂ‹«
+ç’°å¢ƒ
 -----------------------
 
 - Scala 2.9.1
 - JavaSE 7u3
 - sbt 0.11.2
 
-build •û–@
+build æ–¹æ³•
 -----------------------
 
-1. [Scala ŠJ”­ŠÂ‹«\’zè‡](https://github.com/scalajp/scalajp.github.com/wiki/scala-develop-environment "Scala ŠJ”­ŠÂ‹«\’zè‡") 
-   ‚ğQÆ‚µAsbt ƒCƒ“ƒXƒg[ƒ‹‚ğs‚¢‚Ü‚·B
-1. ƒCƒ“ƒXƒg[ƒ‹‚µ‚½ sbt ‚ÌÀsƒVƒFƒ‹(Mac, Linux ‚È‚ç sbtAWindows‚È‚ç sbt.bat) ‚ğŠJ‚«AJVMƒIƒvƒVƒ‡ƒ“‚ğˆÈ‰º‚Éİ’è‚µ‚Ü‚·B
+1. [Scala é–‹ç™ºç’°å¢ƒæ§‹ç¯‰æ‰‹é †](https://github.com/scalajp/scalajp.github.com/wiki/scala-develop-environment "Scala é–‹ç™ºç’°å¢ƒæ§‹ç¯‰æ‰‹é †") 
+   ã‚’å‚ç…§ã—ã€sbt ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã‚’è¡Œã„ã¾ã™ã€‚
+1. ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ãŸ sbt ã®å®Ÿè¡Œã‚·ã‚§ãƒ«(Mac, Linux ãªã‚‰ sbtã€Windowsãªã‚‰ sbt.bat) ã‚’é–‹ãã€JVMã‚ªãƒ—ã‚·ãƒ§ãƒ³ã‚’ä»¥ä¸‹ã«è¨­å®šã—ã¾ã™ã€‚
 
         java -Xmx1536M -Xss1M -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256m
 
-    - 32bit OS ‚Ìê‡‚Í `-Xmx1024M` ‚É‚µ‚Ä‰º‚³‚¢B
+    - 32bit OS ã®å ´åˆã¯ `-Xmx1024M` ã«ã—ã¦ä¸‹ã•ã„ã€‚
 
-1. TerminalA‚à‚µ‚­‚ÍƒRƒ}ƒ“ƒhƒvƒƒ“ƒvƒg‚É‚ÄAƒvƒƒWƒFƒNƒgƒ‹[ƒg‚ÉˆÚ“®‚µA`sbt assembly` ‚ğÀs‚µ‚Ü‚·B
+1. Terminalã€ã‚‚ã—ãã¯ã‚³ãƒãƒ³ãƒ‰ãƒ—ãƒ­ãƒ³ãƒ—ãƒˆã«ã¦ã€ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆãƒ«ãƒ¼ãƒˆã«ç§»å‹•ã—ã€`sbt assembly` ã‚’å®Ÿè¡Œã—ã¾ã™ã€‚
 
-Às•û–@
+å®Ÿè¡Œæ–¹æ³•
 -----------------------
 
 ### Benchmark
 
-1. ˆÈ‰º‚ÌƒRƒ}ƒ“ƒh‚ğÀs‚µ‚Ü‚·B
+1. ä»¥ä¸‹ã®ã‚³ãƒãƒ³ãƒ‰ã‚’å®Ÿè¡Œã—ã¾ã™ã€‚
 
-        java -Xmx1536M -Xms=1536 -Xss1M -XX:MaxPermSize=256m -server -cp target/javaone-tokyo-2012-jvm-bof-assembly-0.1.jar org.scala_users.jp.bench.Benchmark ${ƒeƒXƒg‘ÎÛCSVƒpƒX}
+        java -Xmx1536M -Xms=1536 -Xss1M -XX:MaxPermSize=256m -server -cp target/javaone-tokyo-2012-jvm-bof-assembly-0.1.jar org.scala_users.jp.bench.Benchmark ${ãƒ†ã‚¹ãƒˆå¯¾è±¡CSVãƒ‘ã‚¹}
 
-    - Windows ‚Ìê‡‚Í path ‹æØ‚è•¶š‚ğƒoƒbƒNƒXƒ‰ƒbƒVƒ…‚É‚µ‚Ä‰º‚³‚¢B `target\javaone-tokyo-2012-jvm-bof-assembly-0.1.jar`
-    - 32bit OS ‚Ìê‡‚Í `-Xmx1024M -Xms=1024` ‚É‚µ‚Ä‰º‚³‚¢B
+    - Windows ã®å ´åˆã¯ path åŒºåˆ‡ã‚Šæ–‡å­—ã‚’ãƒãƒƒã‚¯ã‚¹ãƒ©ãƒƒã‚·ãƒ¥ã«ã—ã¦ä¸‹ã•ã„ã€‚ `target\javaone-tokyo-2012-jvm-bof-assembly-0.1.jar`
+    - 32bit OS ã®å ´åˆã¯ `-Xmx1024M -Xms=1024` ã«ã—ã¦ä¸‹ã•ã„ã€‚
 
 ### DSL
 
-ì¬’†
+ä½œæˆä¸­
 

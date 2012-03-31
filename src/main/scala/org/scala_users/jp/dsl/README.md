@@ -1,27 +1,27 @@
-# �e�[�}�F�K�w��Java�v���p�e�B�t�@�C�� DSL�쐬
+# テーマ：階層化Javaプロパティファイル DSL作成
 
-## �y�T�v�z
+## 【概要】
 
-Groovy, Scala, JRuby�̊e����ŁA���L�ɏq�ׂ�悤�ȊK�w��Java�v���p�e�B�t�@�C��
-DSL���쐬���A�����R�[�h�̒����ADSL�Ƃ��Ă̗��֐��Ȃǂ��r����B
+Groovy, Scala, JRubyの各言語で、下記に述べるような階層化Javaプロパティファイル
+DSLを作成し、実装コードの長さ、DSLとしての利便性などを比較する。
 
-Java�̃v���p�e�B�t�@�C���́A
+Javaのプロパティファイルは、
 
     key=value
     ...
 
-�Ƃ����Akey=value���t���b�g�ɕ��񂾃V���v���Ȃ��̂ŁA�������₷���B�������A���ۂɃv���p�e�B�t�@�C�������p������ʂł́A
-key��a.b.c.d�̂悤��.�ŋ�؂�ꂽ�`���ɂȂ��Ă��鎖���قƂ�ǂł���B����.��؂�̌`���́A
+という、key=valueがフラットに並んだシンプルなもので、理解しやすい。しかし、実際にプロパティファイルが活用される場面では、
+keyはa.b.c.dのように.で区切られた形式になっている事がほとんどである。この.区切りの形式は、
 
     x.y.z.a=
     x.y.z.b=
     x.y.z.c=
 
-�̂悤�ɁA�v���t�B�N�X�̕���(x.y.z)�����ʂł��邱�Ƃ����΂��΂���B���̂悤�ȏꍇ�A���[�U��
-�Ӑ}�Ƃ��ẮA�v���p�e�B�̃L�[�ɊK�w�\���������������Ǝv���邪�A�v���p�e�B�t�@�C����
-�{���I�Ƀt���b�g�ł��鎖����A���̎����\���ł��Ă��Ȃ��B
+のように、プレフィクスの部分(x.y.z)が共通であることがしばしばある。そのような場合、ユーザの
+意図としては、プロパティのキーに階層構造を持たせたいと思われるが、プロパティファイルが
+本質的にフラットである事から、その事が表現できていない。
 
-�����ŁA��L�Ɠ������̂��K�w�I�ɕ\���ł���DSL����邱�Ƃ��l����B
+そこで、上記と同じものを階層的に表現できるDSLを作ることを考える。
 
     compiler.error.message.varNotFound=...
     compiler.error.message.incompatibleType=...
@@ -29,7 +29,7 @@ key��a.b.c.d�̂悤��.�ŋ�؂�ꂽ�`���ɂȂ��Ă��鎖���قƂ�ǂł���B����.��؂�
     compiler.files.input.encoding=
     compiler.files.output.encoding=
 
-�Ƃ����̂��A
+というのを、
 
     compiler {
      error {
@@ -45,15 +45,15 @@ key��a.b.c.d�̂悤��.�ŋ�؂�ꂽ�`���ɂȂ��Ă��鎖���قƂ�ǂł���B����.��؂�
      }
     }
 
-�̂悤�ɋ[���I�ɊK�w�I�ɏ�����ƁA���ǂ݂₷���Ȃ邱�Ƃ��l������B���̂悤�ȁA
-�v���p�e�B�t�@�C���̃L�[���K�w�\���ŋL�q�ł���DSL���쐬���鎖�Ƃ���B
+のように擬似的に階層的に書けると、より読みやすくなることが考えられる。このような、
+プロパティファイルのキーを階層構造で記述できるDSLを作成する事とする。
 
-## �y�v���z
+## 【要件】
 
-* ���͌`���͖��Ȃ��B�e�L�X�g�t�@�C���ŏ�L�̂悤�Ȍ`�����������Ă��ǂ����A�����DSL
-  �Ƃ��Ď������Ă����܂�Ȃ��B
-* �v���p�e�B�t�@�C���̃L�[����.�ŋ�؂�ꂽ������P�ʂƂ��āA�L�[�����K�w�����ĊǗ��ł��鎖
-    * x.y.z �Ƃ����L�[�����ȉ��̂悤�ɋL�q�ł���
+* 入力形式は問わない。テキストファイルで上記のような形式を実現しても良いし、言語内DSL
+  として実現してもかまわない。
+* プロパティファイルのキー名の.で区切られた部分を単位として、キー名を階層化して管理できる事
+    * x.y.z というキー名を以下のように記述できる
 
               x {
                 y {
@@ -61,5 +61,5 @@ key��a.b.c.d�̂悤��.�ŋ�؂�ꂽ�`���ɂȂ��Ă��鎖���قƂ�ǂł���B����.��؂�
                 }
               }
 
-* java.util.Properties�I�u�W�F�N�g�֕ϊ����邽�߂̕��@��񋟂��鎖
-* Java�`���̃v���p�e�B�t�@�C���ւ̃V���A���C�Y���T�|�[�g���鎖
+* java.util.Propertiesオブジェクトへ変換するための方法を提供する事
+* Java形式のプロパティファイルへのシリアライズをサポートする事
