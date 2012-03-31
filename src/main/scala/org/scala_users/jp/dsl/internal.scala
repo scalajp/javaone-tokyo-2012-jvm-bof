@@ -17,17 +17,11 @@ object internal extends ToProperties {
       newValues
     }
 
-    def := (body: => Any): Map[String, String] = {
+    def := (body: => Map[String, String]): Map[String, String] = {
       current.withValue(concatKey(key)) {
         values.value match {
-          case Some(v) => {
-            body
-            v
-          }
-          case None => values.withValue(Some(Map())) {
-            body
-            values.value.getOrElse(Map())
-          }
+          case None => values.withValue(Some(Map()))(body)
+          case _ => body
         }
       }
     }
