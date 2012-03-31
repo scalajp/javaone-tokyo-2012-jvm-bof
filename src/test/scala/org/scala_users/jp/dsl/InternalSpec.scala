@@ -12,20 +12,20 @@ class InternalSpec extends Specification { def is =
                                                                               end
 
   val target =
-    "compiler" := (
-      "error" := (
-        "message" := (
-          "varNotFound" := "a{1}",
+    "compiler" := {
+      "error" := {
+        "message" := {
+          "varNotFound" := "a{1}"
           "incompatibleType" := "b"
-          ),
+        }
         "maxReport" := "c"
-        ),
-      "files" := (
-        "d",
-        "input.encoding" := "e",
+      }
+      "files" := {
+        "" := "d"
+        "input.encoding" := "e"
         "output.encoding" := "f"
-        )
-      )
+      }
+    }
 
   def `Internal DSL can parse` = target.toProperties must beEqualTo {
     val p = new Properties

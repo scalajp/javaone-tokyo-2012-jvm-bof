@@ -2,22 +2,29 @@ package org.scala_users.jp.dsl
 
 import scala.util.parsing.combinator._
 
-object external extends RegexParsers {
+object external extends RegexParsers with ToProperties {
 
-  def term: Parser[String] = """([\w.]|\\\{|\\\})+""".r ^^ { case v => v.filter('\\'!=) }
+  def key: Parser[String] = """[\w.]+""".r
 
-  def unit: Parser[HierarchyMap[String]] = term~"="~term ^^ {
-    case (k~_~v) => HierarchyMap(k -> v)
+  def value: Parser[String] = """[^\s][^\r\n]*""".r
+
+  def pair: Parser[Map[String, String]] = key~"="~value ^^ {
+    case key~_~value => Map(key -> value)
   }
 
-  def value: Parser[HierarchyMap[String]] = unit | term ^^ { case v => new HierarchyMap(Some(v), Map.empty) }
-
-  def prefixWith: Parser[HierarchyMap[String]] = term~"{"~rep(prefixWith | value)~"}" ^^ {
-    case prefix~_~v~_ => prefix :+: v.reduceLeft(_ ++ _)
+  def unit: Parser[Map[String, String]] = "="~>value ^^ {
+    case value => Map("" -> value)
   }
 
-  def all: Parser[HierarchyMap[String]] = rep(prefixWith | value) ^^ {
-    case v => v.reduceLeft(_ ++ _)
+  def properties: Parser[Map[String, String]] = rep(unit | pair | nested) ^^ {
+    _.flatten.toMap
+  }
+
+  def nested: Parser[Map[String, String]] = key~("{"~>properties<~"}") ^^ {
+    case key~values => values.map {
+      case ("", v) => (key, v)
+      case (k, v)  => (key + "." + k, v)
+    }
   }
 
 }

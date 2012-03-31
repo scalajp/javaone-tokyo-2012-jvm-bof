@@ -15,20 +15,20 @@ class ExternalSpec extends Specification { def is =
     compiler {
       error {
         message {
-          varNotFound = a\{1\}
+          varNotFound = a{1}
           incompatibleType = b
         }
         maxReport = c
       }
       files {
-        d
+        = d
         input.encoding = e
         output.encoding = f
       }
     }
     """
-
-  def `External DSL can parse` = parseAll(all, target).get.toProperties must beEqualTo {
+  
+  def `External DSL can parse` = parseAll(properties, target).get.toProperties must beEqualTo {
     val p = new Properties
     p.setProperty("compiler.error.message.varNotFound", "a{1}")
     p.setProperty("compiler.error.message.incompatibleType", "b")
