@@ -8,7 +8,8 @@ class InternalSpec extends Specification { def is =
 
   "This is a spec to check the Internal DSL"                                  ^
                                                                               p^
-  `Internal DSL can parse`                                                    ^
+  `Internal DSL should be able to parse`                                      ^
+  `Internal DSL should define multiple values`                                ^
                                                                               end
 
   val target =
@@ -27,7 +28,9 @@ class InternalSpec extends Specification { def is =
       }
     }
 
-  def `Internal DSL can parse` = target.toProperties must beEqualTo {
+  val target2 = "hoge" := "mage"
+
+  def `Internal DSL should be able to parse` = target.toProperties must beEqualTo {
     val p = new Properties
     p.setProperty("compiler.error.message.varNotFound", "a{1}")
     p.setProperty("compiler.error.message.incompatibleType", "b")
@@ -37,5 +40,9 @@ class InternalSpec extends Specification { def is =
     p.setProperty("compiler.files.output.encoding", "f")
     p
   }
+
+  def `Internal DSL should define multiple values` =
+    target2 must beEqualTo(Map("hoge" -> "mage"))
+
 
 }
