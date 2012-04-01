@@ -1,6 +1,7 @@
 package org.scala_users.jp.bench
 
 import com.twitter.util.Time
+import com.twitter.conversions.time._
 import java.io.{InputStreamReader, FileInputStream, BufferedReader}
 
 object Benchmark {
@@ -17,10 +18,10 @@ object Benchmark {
     }
   }
 
-  def execute(fileName: String) {
-    val start = Time.now
-
-    val map = mutable.RBTreeMap.newInstance
+  def execute(fileName: String, isMutable: Boolean) {
+    val map: RBTreeMapI =
+      if (isMutable) mutable.RBTreeMap.newInstance
+      else immutable.RBTreeMap.newInstance
 
     using(fileName) { stream =>
       for {
@@ -41,18 +42,18 @@ object Benchmark {
         assert(value == actual)
       }
     }
-
-    start.untilNow.inMilliseconds
   }
   
   
   def main(args: Array[String]) {
     val file = args(0)
-    1 to 5 foreach { _ =>
-      execute(file)
-    }
+    val isMutable = args.size > 1 && args(1) == "immutable"
+    val warmUpStart = Time.now
+    do {
+      execute(file, isMutable)
+    } while (warmUpStart.untilNow < 10.seconds)
     val start = Time.now
-    execute(file)
+    execute(file, isMutable)
     println(start.untilNow.inMilliseconds)
   }
   

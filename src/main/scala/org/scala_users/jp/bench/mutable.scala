@@ -1,5 +1,7 @@
 package org.scala_users.jp.bench.mutable
 
+import org.scala_users.jp.bench.RBTreeMapI
+
 sealed abstract class RBTree {
   import RBTree._
 
@@ -84,7 +86,7 @@ object RBTree {
 
 }
 
-class RBTreeMap {
+class RBTreeMap extends RBTreeMapI {
   var root: RBTree = Empty
 
   def throwExIfNull(key: String) {

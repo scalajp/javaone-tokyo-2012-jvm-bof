@@ -1,5 +1,7 @@
 package org.scala_users.jp.bench.immutable
 
+import org.scala_users.jp.bench.RBTreeMapI
+
 sealed abstract class Color(val height: Int)
 case object Red extends Color(0)
 case object Black extends Color(1)
@@ -45,7 +47,7 @@ case class Node(color: Color, left: RBTree, entry: Entry, right: RBTree) extends
   lazy val height = color.height + (left.height max right.height)
 }
 
-class RBTreeMap {
+class RBTreeMap extends RBTreeMapI {
   private var root: RBTree = Empty
 
   def throwExIfNull(key: String) {
