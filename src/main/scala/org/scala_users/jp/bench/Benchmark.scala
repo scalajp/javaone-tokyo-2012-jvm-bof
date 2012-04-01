@@ -18,10 +18,10 @@ object Benchmark {
     }
   }
 
-  def execute(fileName: String, isMutable: Boolean) {
+  def execute(fileName: String, isImmutable: Boolean) {
     val map: RBTreeMapI =
-      if (isMutable) mutable.RBTreeMap.newInstance
-      else immutable.RBTreeMap.newInstance
+      if (isImmutable) immutable.RBTreeMap.newInstance
+      else mutable.RBTreeMap.newInstance
 
     using(fileName) { stream =>
       for {
@@ -47,13 +47,13 @@ object Benchmark {
   
   def main(args: Array[String]) {
     val file = args(0)
-    val isMutable = args.size > 1 && args(1) == "immutable"
+    val isImmutable = args.size > 1 && args(1) == "immutable"
     val warmUpStart = Time.now
     do {
-      execute(file, isMutable)
+      execute(file, isImmutable)
     } while (warmUpStart.untilNow < 10.seconds)
     val start = Time.now
-    execute(file, isMutable)
+    execute(file, isImmutable)
     println(start.untilNow.inMilliseconds)
   }
   
