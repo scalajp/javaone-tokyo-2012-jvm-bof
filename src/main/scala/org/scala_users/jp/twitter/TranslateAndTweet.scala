@@ -33,7 +33,7 @@ object TranslateAndTweet {
       .text
   }
 
-  val addHashTag: String => String = _ + " #javaonetokyo_bof"
+  val addHashTag: String => String = _ + " #jt12_b202"
 
   val tweet: String => Unit = { msg =>
     val consumer = Token("Consumer Key", "Consumer Secret")
