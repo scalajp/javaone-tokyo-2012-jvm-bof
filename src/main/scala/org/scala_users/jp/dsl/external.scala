@@ -26,5 +26,8 @@ object external extends RegexParsers with ToProperties {
       case (k, v)  => (key + "." + k, v)
     }
   }
+  
+  def parseProperties(input: CharSequence): ParseResult[Map[String, String]] =
+    parseAll(properties, input)
 
 }
