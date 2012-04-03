@@ -33,7 +33,10 @@ build 方法
     - Windows の場合は path 区切り文字をバックスラッシュにして下さい。 `target\javaone-tokyo-2012-jvm-bof-assembly-0.1.jar`
     - 32bit OS の場合は `-Xmx1024M -Xms=1024` にして下さい。
 
-### DSL
+### Twitter 連携
 
-作成中
+1. 以下のコマンドを実行します。
+
+        echo "Hello Scala!" | java -jar target/javaone-tokyo-2012-jvm-bof-assembly-0.1.jar
+
 
