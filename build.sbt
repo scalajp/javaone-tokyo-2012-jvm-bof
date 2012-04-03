@@ -21,3 +21,5 @@ libraryDependencies ++= Seq(
 )
 
 seq(assemblySettings: _*)
+
+mainClass in assembly := Some("org.scala_users.jp.twitter.TranslateAndTweet")
