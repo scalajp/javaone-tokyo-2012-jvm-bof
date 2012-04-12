@@ -12,6 +12,7 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= Seq(
+  "log4j" % "log4j" % "1.2.16" % "compile",
   "thrift" % "libthrift" % "0.5.0" from "http://maven.twttr.com/org/apache/thrift/libthrift/0.5.0/libthrift-0.5.0.jar",
   "org.scalaj" %% "scalaj-http" % "0.3.0",
   "com.github.scala-incubator.io" %% "scala-io-core" % "0.3.0",
